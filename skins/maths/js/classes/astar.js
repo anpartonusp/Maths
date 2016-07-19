@@ -1,5 +1,24 @@
 var astar = {
     init: function(grid) {
+        var x = 0, y = 0;
+        grid.forEach(function(node) {
+            node.f = 0;
+            node.g = 0;
+            node.h = 0;
+            node.cost = 1;
+            node.visited = false;
+            node.closed = false;
+            node.parent = null;
+            node.x = x;
+            node.y = y;
+            x++;
+            if (x==100) {
+                x = 0;
+                y++;
+            }
+        });
+
+        /*
         for(var x = 0, xl = grid.length; x < xl; x++) {
             for(var y = 0, yl = grid[x].length; y < yl; y++) {
                 var node = grid[x][y];
@@ -12,6 +31,7 @@ var astar = {
                 node.parent = null;
             }
         }
+        */
     },
     heap: function() {
         return new BinaryHeap(function(node) {

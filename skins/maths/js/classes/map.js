@@ -15,7 +15,6 @@ class MapContainer extends View {
     }
 }
 
-
 class Map extends View {
     constructor(tilemaps, dat) {
         super(dat);
@@ -32,14 +31,18 @@ class Map extends View {
         this.man = new Player("man",{handle:{x:0.5,y:0.9},x:pos.x,y:pos.y});
         this.add(this.man);
         this.XX = this.YY = 1;
+        this.starMap = [];
     }
     load(filename) {
+        this.starMap = [];
         this.layers = null;
         this.ready = false;
         var data = TileMaps[filename];
+       
         data.tilesets.forEach(function(t) {
             t.graphics = game.imageManager.get("images/tiles/"+getFilenameFromPath(t.image));
             if (t.hasOwnProperty("tilepropertytypes")) t.tilepropertytypes = undefined;
+
         });
         this.tiles = data.tilesets;
         this.layers = data.layers;
@@ -52,7 +55,7 @@ class Map extends View {
         this.ready = true;
 
     }
-    onMouseDown(x,y) {
+    onMouseUp(x,y) {
         var pos = this.to2({x:x,y:y});
         this.man.setTarget(pos);
     }
@@ -71,12 +74,10 @@ class Map extends View {
         var xEnd = xStart+this.mapWidth;
         for(var y = 0;y<this.mapHeight;y++) {
             var base = y*this.mapWidth;
-
             for(var x = xStart;x<xEnd;x++) {
                 var sym = l.data[base+x];
                 this._drawTile(sym,x,y);
             }
-
         }
     }
     to3(pos) {
@@ -91,15 +92,10 @@ class Map extends View {
         xx = Math.round(xx/this.tileWidth*2);
         yy = Math.round(yy/this.tileHeight);
         return {x:xx,y:yy};
-
     }
-
-
 
     _drawTile(sym, x, y) {
         var pos = this.to3({x:x,y:y});
-
-
         sym-=this.tiles[0].firstgid;
         var iy = Math.floor(sym / this.tiles[0].columns);
         var ix =sym % this.tiles[0].columns;
