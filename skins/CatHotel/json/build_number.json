@@ -1,0 +1,8 @@
+{
+    "module": "MODULE_NAME",
+    "version": "PROJECT_VERSION",
+    "build_number": "JENKINS_BUILD_NUMBER",
+    "build_id": "JENKINS_BUILD_ID",
+    "git_hash": "GIT_HASH",
+    "git_branch": "GIT_BRANCH"
+}

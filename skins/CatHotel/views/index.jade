@@ -1,0 +1,39 @@
+//html(manifest="cache.appcache")
+//html
+head
+   meta(charset="UTF-8")
+   link(rel="stylesheet" type="text/css" href="css/main.css")
+   link(rel="stylesheet" type="text/css" href="css/game.css")
+   link(rel="stylesheet" type="text/css" href="css/InfoLandscape.css")
+   link(rel="stylesheet" type="text/css" href="css/uiportrait.css")
+   link(rel="stylesheet" type="text/css" href="css/InfoPortrait.css")
+   link(rel="stylesheet" type="text/css" href="css/settingslandscape.css")
+   link(rel="stylesheet" type="text/css" href="css/settingsportrait.css")
+   link(rel="stylesheet" type="text/css" href="css/dialog.css")
+   link(rel="apple-touch-icon" href="images/apple-touch-icon.png")
+   link(rel="icon" sizes="196x196" href="images/apple-touch-icon.png")
+   meta(name="apple-touch-fullscreen" content="yes")
+   meta(name="viewport" content="width=device-width,height=device-height, initial-scale=1, user-scalable=no")
+   meta(name="apple-mobile-web-app-capable" content="yes")
+   //script(src='https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js')
+   script(src="js/main.js")
+   title Cat Hotel
+body
+   div.background#mainouter
+   img.topbar#topbar(src="images/topbar.jpg")
+   div#container
+      include includes/InfoLandscape
+      include includes/error
+      include includes/SettingsLandscape
+      include includes/dialog
+   include includes/ui
+   include includes/titlescreen
+   include includes/SettingsPortrait
+   include includes/InfoPortrait
+   include includes/reality
+
+script.
+   $(window).bind("load",function() {
+      start()
+   });
+script(src="//localhost:35729/livereload.js")

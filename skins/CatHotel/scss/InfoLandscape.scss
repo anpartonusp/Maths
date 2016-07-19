@@ -1,0 +1,174 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/css3/images";
+
+@mixin center {
+  position:absolute;
+  left:50%;
+  top:50%;
+  @include transform(translate(-50%,-50%));
+}
+@mixin hcenter {
+  position:relative;
+  left:50%;
+  @include transform(translate(-50%,0%));
+}
+@mixin vcenter {
+  position:absolute;
+  top:50%;
+  @include transform(translate(0%,-50%));
+}
+
+
+.deskinfo {
+
+  width:81%;
+  height:84%;
+  background-image: url("../images/ui/desktop/CH_desktop_info.png");
+  background-size: 100% 100%;
+  font-family:"Montserrat";
+  font-size:2.5vh;
+  overflow:hidden;
+  display:none;
+  @include hcenter;
+  .leftarrow {
+    position:absolute;
+    width:5%;
+    left:8%;
+    bottom:2%;
+    z-index:10000;
+    cursor:pointer;
+  }
+  .rightarrow {
+    @include transform(scaleX(-1));
+    position:absolute;
+    width:5%;
+    left:16%;
+    bottom:2%;
+    z-index:10000;
+    cursor:pointer;
+
+  }
+  .normal {
+
+    font-size:0.8em;
+    text-align:center;
+    width:90%;
+  }
+  .header {
+    font-family: "Rammetto One";
+    font-size:1.5em;
+    margin-bottom:0.5em;
+    margin-top:0.5em;
+    text-align:center;
+  }
+  .close {
+    position:absolute;
+    right:1%;
+    top:1%;
+    width:3%;
+    //display:none;
+    img {
+      width:100%;
+      position:absolute;
+      cursor:pointer;
+    }
+
+  }
+
+  .separator {
+    width:100%;
+    height:8px;
+    background-image: url("../images/ui/CH_mobile_divider.png");
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display:block;
+    //@include hcenter;
+  }
+  .blank {
+    width:100%;
+    height:1em;
+    display:block;
+  }
+  .outerinner {
+    pointer-events: none;
+    width:100%;
+    height:78%;
+    //position:relative;
+    @include vcenter;
+    margin-top:2%;
+  }
+  .innerscrollwindow {
+    width:300%;
+    height:100%;
+    left:0px;
+    position:relative;
+  }
+  .innertile {
+    width:33.333%;
+    height:100%;
+    float:left;
+    text-align:center;
+    font-size:0.95em;
+    img {
+      width:88%;
+    }
+    .pay {
+      margin-top:-1%;
+      width:99%;
+    }
+    .rightnormal {
+      width:90%;
+    }
+    .paytableouter {
+      width:88%;
+      margin-left:-4%;
+      display:inline-block;
+      overflow-x:hidden;
+    }
+    .paytable {
+      font-size:0.7em;
+      display:inline-block;
+      text-align:center;
+      width:24%;
+    }
+    .paytableouter2 {
+      width:100%;
+      margin-left:-9%;
+      display:inline-block;
+      overflow-x:hidden;
+    }
+
+    .paytable2 {
+      font-size:0.7em;
+      display:inline-block;
+      text-align:center;
+      width:33%;
+    }
+
+  }
+  .left {
+    text-align:center;
+    width:30%;
+    display:inline-block;
+    img {
+      width:80%;
+      padding-top:9%;
+    }
+    .lefttext {
+      width:80%;
+      font-size:0.8em;
+      margin-left:10%;
+    }
+  }
+  .right {
+    width:70%;
+    display:inline-block;
+    float:right;
+    img {
+      width:90%;
+    }
+
+  }
+}

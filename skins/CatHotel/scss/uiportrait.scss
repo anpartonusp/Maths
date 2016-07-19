@@ -1,0 +1,147 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/css3/images";
+
+@mixin center {
+  position:absolute;
+  left:50%;
+  top:50%;
+  @include transform(translate(-50%,-50%));
+}
+@mixin hcenter {
+  position:absolute;
+  left:50%;
+  @include transform(translate(-50%,0%));
+}
+@mixin vcenter {
+  position:absolute;
+  top:50%;
+  @include transform(translate(0%,-50%));
+}
+
+.topbar {
+  width:100%;
+  position:absolute;
+  left:0px;
+  top:0px;
+  display:none;
+}
+
+#ui {
+  display:none;
+  position:absolute;
+  left:0px;
+  top:0px;
+  display:none;
+  width:500px;
+  height:500px;
+
+
+  background-image: url("../images/ui/CH_mobile_base.jpg");
+  background-size:100% 100%;
+  color:whitesmoke;
+  overflow:hidden;
+  font-size:60px;
+  text-align:center;
+
+  .top {
+    color:#f9daa1;
+    font-family:"Rammetto One";
+    font-size:6vh;
+    -webkit-text-fill-color: #232140; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.4vw;
+    -webkit-text-stroke-color: #f9daa1;
+    top:0px;
+    line-height:1em;
+    height:15%;
+    position:absolute;
+    width:100%;
+    span {
+      @include vcenter;
+      width:100%;
+    }
+  }
+  .middle {
+    top:15%;
+    height:100%;
+    width:100%;
+    //background-color:rgba(255,0,0,0.2);
+    .start {
+      @include center;
+      position:absolute;
+      width:35%;
+      cursor:pointer;
+      img {
+        width:100%;
+      }
+    }
+    .bet {
+      @include vcenter;
+      left:72%;
+      width:20%;
+      cursor:pointer;
+      img {
+        width:100%;
+      }
+    }
+    .tools {
+      position:absolute;
+      top:75%;
+      height:15%;
+      width:100%;
+      //background-color:rgba(0,0,255,0.2);
+      .home {
+        position:absolute;
+        height:100%;
+        left:2%;
+        cursor:pointer;
+      }
+      .settings {
+        float:right;
+        height:100%;
+        margin-right:4px;
+        right:2%;
+        cursor:pointer;
+      }
+      .info {
+        float:right;
+        height:100%;
+        margin-right:4px;
+        right:15%;
+        cursor:pointer;
+      }
+    }
+  }
+
+
+  .bottom {
+    top:93%;
+    height:7%;
+    position:absolute;
+    width:100%;
+    font-family:"Montserrat";
+    font-size:4vw;
+    line-height:0.5em;
+    span {
+      @include vcenter;
+    }
+    .balance {
+      position:absolute;
+      left:15%;
+      //margin-top:1vh;
+    }
+    .bet {
+      position:absolute;
+      left:60%;
+      //margin-top:1vh;
+    }
+    .time {
+      right:2px;
+      //float:right;
+      //margin-top:1vh;
+      //margin-right:1vw;
+    }
+
+  }
+
+}

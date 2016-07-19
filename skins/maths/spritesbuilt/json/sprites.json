@@ -1,0 +1,25 @@
+{
+    "player": {
+        "x": 0,
+        "y": 0,
+        "width": 50,
+        "height": 73,
+        "source_image": "skins/maths/sprites/one/player.png",
+        "image": "../../spritestmp/sprites.png",
+        "total_width": 50,
+        "total_height": 73,
+        "escaped_image": "../../spritestmp/sprites.png",
+        "offset_x": 0,
+        "offset_y": 0,
+        "px": {
+            "x": "0px",
+            "y": "0px",
+            "offset_x": "0px",
+            "offset_y": "0px",
+            "height": "73px",
+            "width": "50px",
+            "total_height": "73px",
+            "total_width": "50px"
+        }
+    }
+}

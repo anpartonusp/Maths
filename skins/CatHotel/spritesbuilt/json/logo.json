@@ -1,0 +1,94 @@
+{
+    "loading_bar_empty": {
+        "x": 0,
+        "y": 86,
+        "width": 138,
+        "height": 2,
+        "source_image": "skins/CatHotel/sprites/logo/loading_bar_empty.png",
+        "image": "../../spritestmp/logo.png",
+        "total_width": 450,
+        "total_height": 88,
+        "escaped_image": "../../spritestmp/logo.png",
+        "offset_x": 0,
+        "offset_y": -86,
+        "px": {
+            "x": "0px",
+            "y": "86px",
+            "offset_x": "0px",
+            "offset_y": "-86px",
+            "height": "2px",
+            "width": "138px",
+            "total_height": "88px",
+            "total_width": "450px"
+        }
+    },
+    "loading_bar_full": {
+        "x": 140,
+        "y": 86,
+        "width": 138,
+        "height": 2,
+        "source_image": "skins/CatHotel/sprites/logo/loading_bar_full.png",
+        "image": "../../spritestmp/logo.png",
+        "total_width": 450,
+        "total_height": 88,
+        "escaped_image": "../../spritestmp/logo.png",
+        "offset_x": -140,
+        "offset_y": -86,
+        "px": {
+            "x": "140px",
+            "y": "86px",
+            "offset_x": "-140px",
+            "offset_y": "-86px",
+            "height": "2px",
+            "width": "138px",
+            "total_height": "88px",
+            "total_width": "450px"
+        }
+    },
+    "loading_bar_tip": {
+        "x": 280,
+        "y": 86,
+        "width": 28,
+        "height": 2,
+        "source_image": "skins/CatHotel/sprites/logo/loading_bar_tip.png",
+        "image": "../../spritestmp/logo.png",
+        "total_width": 450,
+        "total_height": 88,
+        "escaped_image": "../../spritestmp/logo.png",
+        "offset_x": -280,
+        "offset_y": -86,
+        "px": {
+            "x": "280px",
+            "y": "86px",
+            "offset_x": "-280px",
+            "offset_y": "-86px",
+            "height": "2px",
+            "width": "28px",
+            "total_height": "88px",
+            "total_width": "450px"
+        }
+    },
+    "logo": {
+        "x": 0,
+        "y": 0,
+        "width": 450,
+        "height": 84,
+        "source_image": "skins/CatHotel/sprites/logo/logo.png",
+        "image": "../../spritestmp/logo.png",
+        "total_width": 450,
+        "total_height": 88,
+        "escaped_image": "../../spritestmp/logo.png",
+        "offset_x": 0,
+        "offset_y": 0,
+        "px": {
+            "x": "0px",
+            "y": "0px",
+            "offset_x": "0px",
+            "offset_y": "0px",
+            "height": "84px",
+            "width": "450px",
+            "total_height": "88px",
+            "total_width": "450px"
+        }
+    }
+}

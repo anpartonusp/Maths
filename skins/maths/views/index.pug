@@ -1,0 +1,19 @@
+head
+   meta(charset="UTF-8")
+   link(rel="stylesheet" type="text/css" href="css/main.css")
+   link(rel="stylesheet" type="text/css" href="css/game.css")
+   meta(name="apple-touch-fullscreen" content="yes")
+   meta(name="viewport" content="width=device-width,height=device-height, initial-scale=1, user-scalable=no")
+   meta(name="apple-mobile-web-app-capable" content="yes")
+
+   script(src="js/main.js")
+   title Maths Training
+body(onload="start()")
+   div#container
+      video#video
+      include includes/login
+      include includes/dashboard
+      include includes/profile
+      include includes/shop
+
+script(src="//localhost:35729/livereload.js")

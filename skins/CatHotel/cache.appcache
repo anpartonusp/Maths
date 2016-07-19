@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#build
+./audio/audio.json
+./audio/audio.m4a
+./audio/audio.mp3
+./sprites/logo.png
+./sprites/sprites.png
+./sprites/sprites2.png
+./images/CH_Background.png
+NETWORK:
+*
+

@@ -1,0 +1,29 @@
+.settingsportrait#settingsportrait
+   .close
+      img#settingsportraitclose(src="images/ui/desktop/CH_desktop_close.png")
+
+   div.header
+      span Settings
+
+   div.header2
+
+      span Bet
+      br
+      input#betslider2(type="range",min=0.01,max=1,step=0.01)
+      br
+      div
+         span#betamount2.normal
+            | 0.00
+      span Music Volume
+      br
+      input#musicslider2(type="range",min=0,max=1,step=0.01)
+      div
+         span#musicvolume2.normal
+            | 0
+      span Sound Effects Volume
+      br
+      input#fxslider2(type="range",min=0,max=1,step=0.01)
+      div
+         span#fxvolume2.normal
+            | 0
+

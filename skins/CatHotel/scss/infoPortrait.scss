@@ -1,0 +1,181 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/css3/images";
+
+@mixin center {
+  position:absolute;
+  left:50%;
+  top:50%;
+  @include transform(translate(-50%,-50%));
+}
+@mixin hcenter {
+  position:relative;
+  left:50%;
+  @include transform(translate(-50%,0%));
+}
+@mixin vcenter {
+  position:absolute;
+  top:50%;
+  @include transform(translate(0%,-50%));
+}
+
+
+.portraitinfo {
+
+  width:100%;
+  height:100%;
+  background-image: url("../images/ui/desktop/CH_desktop_info.png");
+  background-size: 100% 100%;
+  font-family:"Montserrat";
+  font-size:1.5vw;
+  overflow:hidden;
+  position:absolute;
+  display:none;
+  .leftarrow {
+    position:absolute;
+    width:10%;
+    right:21%;
+    bottom:2%;
+    z-index:10000;
+    cursor:pointer;
+  }
+  .rightarrow {
+    @include transform(scaleX(-1));
+    position:absolute;
+    width:10%;
+    right:5%;
+    bottom:2%;
+    z-index:10000;
+    cursor:pointer;
+
+  }
+
+  .normal {
+    font-size:2.7em;
+    text-align:center;
+    width:90%;
+    padding-left:5%;
+  }
+  .header {
+    font-family: "Rammetto One";
+    font-size:2.6em;
+    margin-bottom:0.5em;
+    margin-top:0.5em;
+    text-align:center;
+  }
+  .close {
+    position:absolute;
+    right:2%;
+    top:2%;
+    width:6%;
+    //display:none;
+    img {
+      cursor: pointer;
+      width:100%;
+    }
+  }
+
+  .separator {
+    width:100%;
+    height:6px;
+    background-image: url("../images/ui/CH_mobile_divider.png");
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display:inline-block;
+    margin-bottom:12px;
+    margin-top:12px;
+    //@include hcenter;
+  }
+  .blank {
+    width:100%;
+    height:1em;
+    display:block;
+  }
+  .outerinner {
+    pointer-events: none;
+    width:100%;
+    height:78%;
+    //position:relative;
+    @include center;
+    margin-top:-6%;
+  }
+  .innerscrollwindow {
+    width:400%;
+    height:100%;
+    left:0px;
+    position:relative;
+  }
+  .innertile {
+    width:25%;
+    height:100%;
+    float:left;
+    text-align:center;
+    img {
+      width:80%;
+    }
+    .boximg {
+      width:30%;
+    }
+    .lineimg {
+      width:75%;
+      margin-top:2%;
+    }
+    .boxtext {
+      display:inline-block;
+      font-size: 2.7em;
+      width:90%;
+    }
+    .rightnormal {
+      width:90%;
+    }
+    .paytableouter {
+      width:74%;
+      margin-left:-4%;
+      display:inline-block;
+      overflow-x:hidden;
+    }
+    .paytable {
+      font-size:1.8em;
+      display:inline-block;
+      text-align:center;
+      width:24%;
+    }
+    .paytableouter2 {
+      width:70%;
+      margin-left:-1%;
+      display:inline-block;
+      overflow-x:hidden;
+    }
+
+    .paytable2 {
+      font-size:1.8em;
+      display:inline-block;
+      text-align:center;
+      width:32%;
+    }
+
+  }
+  .left {
+    text-align:center;
+    width:29%;
+    display:inline-block;
+    font-size:1.3em;
+    img {
+      width:80%;
+    }
+  }
+  .right {
+    width:70%;
+    display:inline-block;
+    float:right;
+    img {
+      width:90%;
+    }
+
+  }
+  #wintable {
+    padding-top:7%;
+    width:90%;
+  }
+}

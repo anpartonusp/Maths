@@ -1,0 +1,37 @@
+@import "compass/css3";
+@import "compass/utilities";
+
+
+@mixin center {
+  position:absolute;
+  left:50%;
+  top:50%;
+  @include transform(translate(-50%,-50%));
+}
+
+@mixin hcenter {
+  position:absolute;
+  left:50%;
+  top:0px;
+  @include transform(translate(-50%,0%));
+}
+
+$default-box-shadow-color: #000000;
+$default-box-shadow-h-offset:4px;
+$default-box-shadow-v-offset:4px;
+$default-box-shadow-blur:8px;
+
+body {
+  margin: 0px 0px 0px 0px;
+  background-color:#000000;
+  font-size:20px;
+  font-family:sans-serif;
+  overflow:hidden;
+}
+
+canvas {
+  width:100%;
+  height:100%;
+  @include hcenter();
+  background: rgba(0,0,0,1);
+}

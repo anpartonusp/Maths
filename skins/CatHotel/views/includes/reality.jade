@@ -1,0 +1,32 @@
+div#realityback.realityback
+div.reality#reality
+   div.outer
+      span You've been playing for
+         span#realityminutes 50
+         span minutes. Do you want to continue?
+      p
+      button.button#realitycontinue Yes
+      button.button#realitylobby No
+      button.widebutton#realityhistory Account History
+
+script.
+   document.getElementById("realitylobby").onclick = function() {
+      window.location.assign(lobbyURL)
+   };
+   document.getElementById("realitycontinue").onclick = function() {
+      if (Config.realityTimer) {
+         Config.startTime = new Date().getTime();
+      };
+      $("#realityback , #reality").fadeOut(400);
+   };
+   document.getElementById("realityhistory").onclick = function() {
+      window.location.assign(Config.lobby+"/history");
+   };
+   function showReality(time) {
+      var t = Math.floor((time/1000)/60);
+      $("#realityminutes").html(t);
+      $("#realityback , #reality").fadeIn(300);
+
+   }
+
+

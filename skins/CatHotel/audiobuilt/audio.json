@@ -1,0 +1,572 @@
+{
+  "resources": [
+    "skins/CatHotel/audiobuilt/audio.mp3",
+    "skins/CatHotel/audiobuilt/audio.m4a"
+  ],
+  "spritemap": {
+    "Box Crumple2": {
+      "start": 0,
+      "end": 0.2830839002267574,
+      "loop": false,
+      "priority": 0
+    },
+    "Box Crumple3": {
+      "start": 2,
+      "end": 2.2514739229024943,
+      "loop": false,
+      "priority": 0
+    },
+    "Box Crumple4": {
+      "start": 4,
+      "end": 4.251473922902495,
+      "loop": false,
+      "priority": 0
+    },
+    "Box Crumple6": {
+      "start": 6,
+      "end": 6.308503401360544,
+      "loop": false,
+      "priority": 0
+    },
+    "Play Button Stickier": {
+      "start": 8,
+      "end": 8.562380952380952,
+      "loop": false,
+      "priority": 0
+    },
+    "Play Button Stickiest": {
+      "start": 10,
+      "end": 10.562380952380952,
+      "loop": false,
+      "priority": 0
+    },
+    "Play Button": {
+      "start": 12,
+      "end": 12.562380952380952,
+      "loop": false,
+      "priority": 0
+    },
+    "UI Button Press": {
+      "start": 14,
+      "end": 14.474603174603175,
+      "loop": false,
+      "priority": 0
+    },
+    "Black Cat1": {
+      "start": 16,
+      "end": 17.135600907029477,
+      "loop": false,
+      "priority": 0
+    },
+    "Black Cat2": {
+      "start": 19,
+      "end": 19.5897052154195,
+      "loop": false,
+      "priority": 0
+    },
+    "Black Cat3": {
+      "start": 21,
+      "end": 22.55090702947846,
+      "loop": false,
+      "priority": 0
+    },
+    "Curious Cat": {
+      "start": 24,
+      "end": 25.160657596371884,
+      "loop": false,
+      "priority": 0
+    },
+    "Curious Cat2": {
+      "start": 27,
+      "end": 27.97156462585034,
+      "loop": false,
+      "priority": 0
+    },
+    "Curious Cat3": {
+      "start": 29,
+      "end": 30.080839002267574,
+      "loop": false,
+      "priority": 0
+    },
+    "Cute Cat": {
+      "start": 32,
+      "end": 32.98353741496599,
+      "loop": false,
+      "priority": 0
+    },
+    "Cute Cat2": {
+      "start": 34,
+      "end": 34.98353741496599,
+      "loop": false,
+      "priority": 0
+    },
+    "Cute Cat3": {
+      "start": 36,
+      "end": 37.16018140589569,
+      "loop": false,
+      "priority": 0
+    },
+    "Dopey Cat": {
+      "start": 39,
+      "end": 39.91766439909297,
+      "loop": false,
+      "priority": 0
+    },
+    "Dopey Cat2": {
+      "start": 41,
+      "end": 41.947596371882085,
+      "loop": false,
+      "priority": 0
+    },
+    "Dopey Cat3": {
+      "start": 43,
+      "end": 44.02546485260771,
+      "loop": false,
+      "priority": 0
+    },
+    "Fatty Cat": {
+      "start": 46,
+      "end": 47.48630385487528,
+      "loop": false,
+      "priority": 0
+    },
+    "Fatty Cat2": {
+      "start": 49,
+      "end": 50.23986394557823,
+      "loop": false,
+      "priority": 0
+    },
+    "Fatty Cat3": {
+      "start": 52,
+      "end": 53.57936507936508,
+      "loop": false,
+      "priority": 0
+    },
+    "Grumpy Cat": {
+      "start": 55,
+      "end": 56.80925170068027,
+      "loop": false,
+      "priority": 0
+    },
+    "Grumpy Cat2": {
+      "start": 58,
+      "end": 59.9127664399093,
+      "loop": false,
+      "priority": 0
+    },
+    "Grumpy Cat3": {
+      "start": 61,
+      "end": 62.687120181405895,
+      "loop": false,
+      "priority": 0
+    },
+    "Grumpy Cat4": {
+      "start": 64,
+      "end": 65.68861678004535,
+      "loop": false,
+      "priority": 0
+    },
+    "Purr 1": {
+      "start": 67,
+      "end": 70.16666666666667,
+      "loop": false,
+      "priority": 0
+    },
+    "Purr 2": {
+      "start": 72,
+      "end": 76.16666666666667,
+      "loop": false,
+      "priority": 0
+    },
+    "Purr 3": {
+      "start": 78,
+      "end": 82.66666666666667,
+      "loop": false,
+      "priority": 0
+    },
+    "Sneaky Cat": {
+      "start": 84,
+      "end": 84.71857142857142,
+      "loop": false,
+      "priority": 0
+    },
+    "Sneaky Cat2": {
+      "start": 86,
+      "end": 86.6631746031746,
+      "loop": false,
+      "priority": 0
+    },
+    "Sneaky Cat3": {
+      "start": 88,
+      "end": 88.69609977324264,
+      "loop": false,
+      "priority": 0
+    },
+    "Line Win Star": {
+      "start": 90,
+      "end": 92.31823129251701,
+      "loop": false,
+      "priority": 0
+    },
+    "Line Win Star2": {
+      "start": 94,
+      "end": 96.31823129251701,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win": {
+      "start": 98,
+      "end": 101.22308390022675,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win1": {
+      "start": 103,
+      "end": 105.90185941043084,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win2": {
+      "start": 107,
+      "end": 110.32213151927438,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win3": {
+      "start": 112,
+      "end": 115.32213151927438,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win4": {
+      "start": 117,
+      "end": 120.42281179138322,
+      "loop": false,
+      "priority": 0
+    },
+    "Regular Win5": {
+      "start": 122,
+      "end": 125.72482993197279,
+      "loop": false,
+      "priority": 0
+    },
+    "WILD win": {
+      "start": 127,
+      "end": 130.16668934240363,
+      "loop": false,
+      "priority": 0
+    },
+    "Wild Squeaks": {
+      "start": 132,
+      "end": 133.65056689342404,
+      "loop": false,
+      "priority": 0
+    },
+    "Wild Squeaks2": {
+      "start": 135,
+      "end": 136.65056689342404,
+      "loop": false,
+      "priority": 0
+    },
+    "Win Catnificent": {
+      "start": 138,
+      "end": 142.13326530612244,
+      "loop": false,
+      "priority": 0
+    },
+    "Win Fancatstic": {
+      "start": 144,
+      "end": 148.72,
+      "loop": false,
+      "priority": 0
+    },
+    "Win Meowrvelous": {
+      "start": 150,
+      "end": 154.12489795918367,
+      "loop": false,
+      "priority": 0
+    },
+    "Win Pawsome": {
+      "start": 156,
+      "end": 160.1499546485261,
+      "loop": false,
+      "priority": 0
+    },
+    "Win Purrfect": {
+      "start": 162,
+      "end": 166.88,
+      "loop": false,
+      "priority": 0
+    },
+    "ComboArrive1": {
+      "start": 168,
+      "end": 169.37498866213153,
+      "loop": false,
+      "priority": 0
+    },
+    "ComboArrive2": {
+      "start": 171,
+      "end": 172.37498866213153,
+      "loop": false,
+      "priority": 0
+    },
+    "ComboArrive3": {
+      "start": 174,
+      "end": 175.12498866213153,
+      "loop": false,
+      "priority": 0
+    },
+    "ComboLeave": {
+      "start": 177,
+      "end": 179.62498866213153,
+      "loop": false,
+      "priority": 0
+    },
+    "Cat Hotel COMBO x1 NO SQUEAK-02": {
+      "start": 181,
+      "end": 183.29714285714286,
+      "loop": false,
+      "priority": 0
+    },
+    "Cat Hotel COMBO x2 NO SQUEAK-02": {
+      "start": 185,
+      "end": 187.5238321995465,
+      "loop": false,
+      "priority": 0
+    },
+    "Cat Hotel COMBO x3 NO SQUEAK-02": {
+      "start": 189,
+      "end": 191.92433106575965,
+      "loop": false,
+      "priority": 0
+    },
+    "Cat Hotel COMBO x4 NO SQUEAK-02": {
+      "start": 193,
+      "end": 196.8084126984127,
+      "loop": false,
+      "priority": 0
+    },
+    "Cat Hotel COMBO x5 NO SQUEAK-02": {
+      "start": 198,
+      "end": 202.45825396825396,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box1": {
+      "start": 204,
+      "end": 204.94396825396825,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box10": {
+      "start": 206,
+      "end": 206.39108843537414,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box11": {
+      "start": 208,
+      "end": 208.40242630385487,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box12": {
+      "start": 210,
+      "end": 210.6040589569161,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box13": {
+      "start": 212,
+      "end": 212.80537414965985,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box14": {
+      "start": 214,
+      "end": 214.80537414965985,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box15": {
+      "start": 216,
+      "end": 216.47922902494332,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box16": {
+      "start": 218,
+      "end": 218.5033560090703,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box2": {
+      "start": 220,
+      "end": 220.32124716553287,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box3": {
+      "start": 222,
+      "end": 222.47562358276645,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box4": {
+      "start": 224,
+      "end": 224.51172335600907,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box5": {
+      "start": 226,
+      "end": 226.52281179138322,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box6": {
+      "start": 228,
+      "end": 228.3571655328798,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box7": {
+      "start": 230,
+      "end": 230.60666666666665,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box8": {
+      "start": 232,
+      "end": 232.61755102040817,
+      "loop": false,
+      "priority": 0
+    },
+    "Individual Box9": {
+      "start": 234,
+      "end": 234.50333333333333,
+      "loop": false,
+      "priority": 0
+    },
+    "Music and Ambience Mix": {
+      "start": 236,
+      "end": 334.1998412698413,
+      "loop": false,
+      "priority": 0
+    },
+    "jump1": {
+      "start": 336,
+      "end": 336.4790702947846,
+      "loop": false,
+      "priority": 0
+    },
+    "jump2": {
+      "start": 338,
+      "end": 338.5579365079365,
+      "loop": false,
+      "priority": 0
+    },
+    "jump3": {
+      "start": 340,
+      "end": 340.32138321995467,
+      "loop": false,
+      "priority": 0
+    },
+    "jump4": {
+      "start": 342,
+      "end": 342.58222222222224,
+      "loop": false,
+      "priority": 0
+    },
+    "jump5": {
+      "start": 344,
+      "end": 344.5215646258503,
+      "loop": false,
+      "priority": 0
+    },
+    "jump6": {
+      "start": 346,
+      "end": 346.27897959183673,
+      "loop": false,
+      "priority": 0
+    },
+    "jump7": {
+      "start": 348,
+      "end": 348.29716553287983,
+      "loop": false,
+      "priority": 0
+    },
+    "jump8": {
+      "start": 350,
+      "end": 350.6064399092971,
+      "loop": false,
+      "priority": 0
+    },
+    "jump9": {
+      "start": 352,
+      "end": 352.6125396825397,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak1": {
+      "start": 354,
+      "end": 354.2170068027211,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak10": {
+      "start": 356,
+      "end": 356.3933333333333,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak2": {
+      "start": 358,
+      "end": 358.33907029478456,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak3": {
+      "start": 360,
+      "end": 360.43403628117915,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak4": {
+      "start": 362,
+      "end": 362.29839002267573,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak5": {
+      "start": 364,
+      "end": 364.17632653061224,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak6": {
+      "start": 366,
+      "end": 366.4950793650794,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak7": {
+      "start": 368,
+      "end": 368.54931972789115,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak8": {
+      "start": 370,
+      "end": 370.42047619047617,
+      "loop": false,
+      "priority": 0
+    },
+    "squeak9": {
+      "start": 372,
+      "end": 372.43403628117915,
+      "loop": false,
+      "priority": 0
+    }
+  }
+}
