@@ -196,9 +196,6 @@ class Entity {
         }
     }
     _mousedown(x,y) {
-        this.mouseButtonDown = true;
-        this.lastMouseX = x;
-        this.lastMouseY = y;
         if (this.visible && this.enabled && this.mouseEnabled) {
             var roted = rotatePoint(x,y,this.x,this.y,-this.rotation);
             x = roted.x;y = roted.y;
@@ -209,17 +206,24 @@ class Entity {
                 this.mouseX = x - this.left;
                 this.mouseY = y - this.top;
                 var res = this.onMouseDown(this.mouseX, this.mouseY);
-                if (typeof(res)=="undefined") res = true;
-                if (res) {
-                    this.children.forEach(function (ent) {
-                        ent._mousedown(this.mouseX, this.mouseY);
-                    }.bind(this));
+
+                if (res==CANCEL) {
+                    console.log("Cancelled")
+                    return CANCEL;
                 }
+
+                for (var i = this.children.length-1;i>=0;i--) {
+                    this.children[i]._mousedown(this.mouseX, this.mouseY);
+                }
+
+
+
             }
         }
+        return null;
     }
     _mouseup(x,y) {
-        this.mouseButtonDown = false;
+
         if (this.visible && this.enabled && this.mouseEnabled) {
             var roted = rotatePoint(x,y,this.x,this.y,-this.rotation);
             x = roted.x;y = roted.y;
@@ -227,16 +231,20 @@ class Entity {
             var ok = (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
             if (this.type=="VIEW" && !this.clip) ok = true;
             if (ok) {
-
                 this.mouseX = x - this.left;
                 this.mouseY = y - this.top;
-                this.onMouseUp(this.mouseX, this.mouseY);
-                this.children.forEach(function (ent) {
-                    ent._mouseup(this.mouseX, this.mouseY);
-                }.bind(this));
+                var res = this.onMouseUp(this.mouseX, this.mouseY);
+                if (res==CANCEL) {
+                    return CANCEL;
+                }
+                for (var i = this.children.length-1;i>=0;i--) {
+                    this.children[i]._mouseup(this.mouseX, this.mouseY);
+                }
+
 
             }
         }
+        return null;
     }
     _windowtouchend(x,y) {
         this.mouseX = x;

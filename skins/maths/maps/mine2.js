@@ -61,15 +61,15 @@
                 },
              "100":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "101":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "102":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "103":
                 {
@@ -105,31 +105,31 @@
                 },
              "110":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "111":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "112":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "113":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "114":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "115":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "116":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "117":
                 {
@@ -605,31 +605,31 @@
                 },
              "80":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "81":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "82":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "83":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "84":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "85":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "86":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "87":
                 {
@@ -649,31 +649,31 @@
                 },
              "90":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "91":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "92":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "93":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "94":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "95":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "96":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "97":
                 {

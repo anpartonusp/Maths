@@ -6,7 +6,7 @@ var Y = HEIGHT/2;
 var game;
 var video;
 var screens;
-var map;
+var map, ui;
 
 var TileMaps;
 var gameConfig = {};
@@ -26,6 +26,8 @@ function startGame() {
     map  = new MapContainer(TileMaps, {width:WIDTH, height:HEIGHT, x:X, y:Y, clearScreen:true, backgroundColor:"black"});
     game.add(map);
 
+    ui = new UI({x:X,y:Y,width:WIDTH, height:HEIGHT});
+    game.add(ui);
 
     game.states.addState("IDLE", idleState);
     

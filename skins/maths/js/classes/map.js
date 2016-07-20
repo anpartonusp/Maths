@@ -69,11 +69,22 @@ class Map extends View {
                     tiles:[],
                     x:x,
                     y:y,
+                    f:0,
+                    g:0,
+                    h:0,
+                    cost:1,
+                    visited:false,
+                    closed:false,
+                    parent:null,
+                    collide: false
                 }
                 data.layers.forEach(function(tiles) {
                     var tt = tiles.data[y*this.mapWidth + x];
                     t.tiles.push(tt);
                 }.bind(this));
+                var index = (t.tiles[1]).toString();
+                if (this.tiles[0].tileproperties.hasOwnProperty(index))
+                    t.collide = this.tiles[0].tileproperties[index].collide;
                 col.push(t);
             }
             this.map.push(col);
@@ -82,7 +93,10 @@ class Map extends View {
 
     onMouseUp(x,y) {
         var pos = this.to2({x:x,y:y});
-        this.player.setTarget(pos);
+        var currPos = this.to2({x:this.player.x,y:this.player.y});
+        var res = astar.search(this.map, this.map[currPos.x][currPos.y], this.map[pos.x][pos.y], false);
+        console.log(res);
+        this.player.setTargets(res);
     }
     update(delta) {
         if (this.centerTarget) {

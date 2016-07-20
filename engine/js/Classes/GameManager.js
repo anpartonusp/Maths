@@ -1,5 +1,5 @@
 var canvas;
-
+const CANCEL = 93284;
 
 
 class GameManager {
@@ -78,10 +78,12 @@ class GameManager {
                 var pos = this.getMouseXY(e);
                 this.lastX = pos.x;
                 this.lastY = pos.y;
-                this.children.forEach(function (vp) {
-                    vp._mousedown(pos.x, pos.y);
-
-                }.bind(this));
+                for(var i = this.children.length-1;i>=0;i--) {
+                    if (this.children[i]._mousedown(pos.x,pos.y)==CANCEL) return;
+                }
+                //this.children.forEach(function (vp) {
+                //    vp._mousedown(pos.x, pos.y);
+                //}.bind(this));
             }
         }.bind(this));
 
@@ -90,9 +92,10 @@ class GameManager {
             if (!this.touch) {
                 e.preventDefault();
                 var pos = this.getMouseXY(e);
-                this.children.forEach(function (vp) {
-                    vp._mouseup(pos.x, pos.y);
-                }.bind(this));
+                for(var i = this.children.length-1;i>=0;i--) {
+                    if (this.children[i]._mouseup(pos.x,pos.y)==CANCEL) return;
+                }
+
             }
         }.bind(this));
 
