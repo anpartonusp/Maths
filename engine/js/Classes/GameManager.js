@@ -81,9 +81,6 @@ class GameManager {
                 for(var i = this.children.length-1;i>=0;i--) {
                     if (this.children[i]._mousedown(pos.x,pos.y)==CANCEL) return;
                 }
-                //this.children.forEach(function (vp) {
-                //    vp._mousedown(pos.x, pos.y);
-                //}.bind(this));
             }
         }.bind(this));
 
@@ -95,7 +92,6 @@ class GameManager {
                 for(var i = this.children.length-1;i>=0;i--) {
                     if (this.children[i]._mouseup(pos.x,pos.y)==CANCEL) return;
                 }
-
             }
         }.bind(this));
 

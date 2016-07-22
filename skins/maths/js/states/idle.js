@@ -1,6 +1,6 @@
 var idleState = {
     init: function() {
-        map.load("mine2");
+        map.load("dd");
 
     },
 

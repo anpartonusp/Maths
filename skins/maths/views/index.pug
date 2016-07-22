@@ -2,6 +2,7 @@ head
    meta(charset="UTF-8")
    link(rel="stylesheet" type="text/css" href="css/main.css")
    link(rel="stylesheet" type="text/css" href="css/game.css")
+   link(rel="stylesheet" type="text/css" href="css/ingame.css")
    meta(name="apple-touch-fullscreen" content="yes")
    meta(name="viewport" content="width=device-width,height=device-height, initial-scale=1, user-scalable=no")
    meta(name="apple-mobile-web-app-capable" content="yes")
@@ -11,6 +12,7 @@ head
 body(onload="start()")
    div#container
       video#video
+      include includes/MapControls
       include includes/login
       include includes/dashboard
       include includes/profile

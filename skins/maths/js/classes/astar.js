@@ -99,44 +99,44 @@ var astar = {
         var y = node.y;
 
         // West
-        if(grid[x-1] && !grid[x-1][y].collide) {
+        if(x>0 && grid[x-1] && !grid[x-1][y].collide) {
             ret.push(grid[x-1][y]);
         }
 
         // East
-        if(grid[x+1] && !grid[x+1][y].collide) {
+        if(x<99 && grid[x+1] && !grid[x+1][y].collide) {
             ret.push(grid[x+1][y]);
         }
 
         // South
-        if(grid[x] && !grid[x][y-1].collide) {
+        if(y>0 && grid[x] && !grid[x][y-1].collide) {
             ret.push(grid[x][y-1]);
         }
 
         // North
-        if(grid[x] && !grid[x][y+1].collide) {
+        if(y<99 && grid[x] && !grid[x][y+1].collide) {
             ret.push(grid[x][y+1]);
         }
 
-        if (diagonals) {
+        if (diagonals && x>0 && x<99 && y>0 && y<99) {
 
             // Southwest
-            if(grid[x-1] && !grid[x-1][y-1].collide) {
+            if(grid[x-1] && !grid[x-1][y-1].collide && (!grid[x-1][y].collide && !grid[x][y+1].collide)) {
                 ret.push(grid[x-1][y-1]);
             }
 
             // Southeast
-            if(grid[x+1] && !grid[x+1][y-1].collide) {
+            if(grid[x+1] && !grid[x+1][y-1].collide && (!grid[x+1][y].collide && !grid[x][y+1].collide)) {
                 ret.push(grid[x+1][y-1]);
             }
 
             // Northwest
-            if(grid[x-1] && !grid[x-1][y+1].collide) {
+            if(grid[x-1] && !grid[x-1][y+1].collide && (!grid[x-1][y].collide && !grid[x][y-1].collide)) {
                 ret.push(grid[x-1][y+1]);
             }
 
             // Northeast
-            if(grid[x+1] && !grid[x+1][y+1].collide) {
+            if(grid[x+1] && !grid[x+1][y+1].collide && (!grid[x+1][y].collide && !grid[x][y+1].collide)) {
                 ret.push(grid[x+1][y+1]);
             }
 

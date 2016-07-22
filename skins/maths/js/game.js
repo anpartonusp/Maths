@@ -11,9 +11,11 @@ var map, ui;
 var TileMaps;
 var gameConfig = {};
 
+
+
 function startGame() {
     game = new GameManager({width:WIDTH, height:HEIGHT});
-    screens = new ScreenManager([ "login", "dashboard", "profile","shop","canvas"]);
+    screens = new ScreenManager([ "login", "dashboard", "profile","shop","canvas", "leftcontrols","rightcontrols"]);
     initSprites("sprites");
     video = new Video();
     $(window).resize(function() {
@@ -21,7 +23,7 @@ function startGame() {
     });
     doResize(16/9);
     
-    screens.show("login");
+    screens.show(["login","rightcontrols"]);
 
     map  = new MapContainer(TileMaps, {width:WIDTH, height:HEIGHT, x:X, y:Y, clearScreen:true, backgroundColor:"black"});
     game.add(map);
@@ -45,5 +47,24 @@ function logout() {
 
 function showMap() {
     game.states.setState("IDLE");
-    screens.show("canvas");
+    screens.show(["canvas","leftcontrols","rightcontrols"]);
 }
+
+function centerView() {
+    map.setTarget()
+}
+
+var fs = false;
+function toggleFullScreen() {
+    if (!fs) {
+        setButtonGraphic("fullscreen","images/controls/full_screen_state.png")
+        launchFullscreen();
+    } else {
+        setButtonGraphic("fullscreen","images/controls/full_screen.png")
+        exitFullscreen();
+    }
+    fs = !fs;
+}
+
+
+

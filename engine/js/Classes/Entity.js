@@ -37,6 +37,7 @@ class Entity {
         this._mouseisover = false;
         this.mouseEnabled = true;
         this.mouseButtonDown = false;
+        this.mouseTimer = 0;
 
     }
     set scale(s) {
@@ -96,6 +97,7 @@ class Entity {
     onMouseMove(x,y) {};
     onMouseDrag(x,y, deltaX, deltaY, button) {};
     onMouseDown(x,y) {};
+    onMouseClick(x,y) {};
     onMouseUp(x,y) {};
     onWindowTouchEnd(x,y) {};
     onMouseEnter(x,y) {}
@@ -203,20 +205,14 @@ class Entity {
             var ok = (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
             if (this.type=="VIEW" && !this.clip) ok = true;
             if (ok) {
+                this.mouseTimer = new Date().getTime();
                 this.mouseX = x - this.left;
                 this.mouseY = y - this.top;
-                var res = this.onMouseDown(this.mouseX, this.mouseY);
-
-                if (res==CANCEL) {
-                    console.log("Cancelled")
-                    return CANCEL;
-                }
-
                 for (var i = this.children.length-1;i>=0;i--) {
-                    this.children[i]._mousedown(this.mouseX, this.mouseY);
+                    if (this.children[i]._mousedown(this.mouseX, this.mouseY)==CANCEL) return;
                 }
 
-
+                if (this.onMouseDown(this.mouseX, this.mouseY)==CANCEL) return CANCEL;
 
             }
         }
@@ -231,15 +227,24 @@ class Entity {
             var ok = (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
             if (this.type=="VIEW" && !this.clip) ok = true;
             if (ok) {
+                var time = new Date().getTime() - this.mouseTimer;
+                this.mouseTimer = 0;
+                if (time<200) {
+
+                    for (var i = this.children.length-1;i>=0;i--) {
+                        if (this.children[i]._mouseup(this.mouseX, this.mouseY)==CANCEL) return;
+                    }
+                    this.onMouseClick(this.mouseX, this.mouseY);
+                    return;
+                }
                 this.mouseX = x - this.left;
                 this.mouseY = y - this.top;
-                var res = this.onMouseUp(this.mouseX, this.mouseY);
-                if (res==CANCEL) {
-                    return CANCEL;
-                }
                 for (var i = this.children.length-1;i>=0;i--) {
-                    this.children[i]._mouseup(this.mouseX, this.mouseY);
+                    if (this.children[i]._mouseup(this.mouseX, this.mouseY)==CANCEL) return CANCEL;
                 }
+                if (this.onMouseUp(this.mouseX, this.mouseY)==CANCEL) return CANCEL;
+
+
 
 
             }

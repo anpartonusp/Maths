@@ -24,7 +24,7 @@
          "name":"Top Layer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -133,11 +133,11 @@
                 },
              "117":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "118":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "119":
                 {
@@ -165,11 +165,11 @@
                 },
              "124":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "125":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "126":
                 {
@@ -421,7 +421,7 @@
                 },
              "39":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "4":
                 {
@@ -445,27 +445,27 @@
                 },
              "44":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "45":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "46":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "47":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "48":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "49":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "5":
                 {
@@ -541,15 +541,15 @@
                 },
              "66":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "67":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "68":
                 {
-                 "collide":false
+                 "collide":true
                 },
              "69":
                 {
