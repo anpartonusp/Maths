@@ -7,6 +7,7 @@ class Character extends Sprite {
         this.currDir = randomInt(0,7);
         this._character = 1;
         this.walkFrame = 0;
+        this.walkSpeed = 128;
         this.walking = false;
         this.baseFrame = 0;
         this.animationSpeed = 8;
@@ -32,7 +33,7 @@ class Character extends Sprite {
         if (this.map.map) {
             var pos = to2round({x: this.x, y: this.y});
             if (pos.x>0 && pos.x<100 && pos.y>0 && pos.y<100) {
-                this.map.map[pos.x][pos.y].character = this;    //.push(this);
+                this.map.map[pos.x][pos.y].character.push(this);    //.push(this);
             }
         }
     }
@@ -122,7 +123,7 @@ class Character extends Sprite {
         var a = this.x-three.x;
         var b = this.y-three.y;
         var c = Math.sqrt(a*a + b*b);
-        var time = c / 128;
+        var time = c / this.walkSpeed;
         this.animate(to3(pos),curve=="linear" ? time : time * 1.5, function(o) {
             if (o.targets.length==1) {
                 o.map.target.active = false;
@@ -145,6 +146,7 @@ class Character extends Sprite {
             }
         }
     }
+    drawExtras() {};
 
 
 }

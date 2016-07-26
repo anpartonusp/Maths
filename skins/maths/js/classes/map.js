@@ -39,6 +39,7 @@ class Map extends View {
         this.centerTarget = this.player;
         this.target = new TARGET("targettile",this, {flipX:true, x:100,y:100, opacity:0.0});
         this.lessons = [];
+        this.npcs = [];
     }
 
     load(filename) {
@@ -62,6 +63,10 @@ class Map extends View {
         return null;
 
     }
+    isCollide(x,y) {
+        return this.map[x][y].collide;
+    }
+
     _convert(data) {
         this.mapWidth = data.width;
         this.mapHeight = data.height;
@@ -72,6 +77,7 @@ class Map extends View {
         this.tiles = data.tilesets;
         this.lessons = [];
         var objectLayers = [];
+        this.npcs = [];
         data.tilesets.forEach(function(t) {
             t.graphics = game.imageManager.get("images/tiles/" + getFilenameFromPath(t.image));
             if (t.hasOwnProperty("tilepropertytypes")) t.tilepropertytypes = undefined;
@@ -95,7 +101,7 @@ class Map extends View {
                     closed:false,
                     parent:null,
                     collide: false,
-                    character : null
+                    character : []
                 }
                 data.layers.forEach(function(tiles) {
                     if (tiles.type!="objectgroup") {
@@ -116,7 +122,7 @@ class Map extends View {
         data.layers.forEach(function(layer) {
             if (layer.type=="objectgroup") {
                 layer.objects.forEach(function(obj) {
-                    if (obj.name=="playerstart") {
+                    if (obj.type=="playerstart") {
                         var pos = {x:Math.floor(obj.x/32),y:Math.floor(obj.y/32)};
                         pos = to3(pos);
                         this.player.x = pos.x;
@@ -135,11 +141,20 @@ class Map extends View {
                         var items = obj.name.split(";");
                         items.forEach(function(i) {
                             var i2 = i.split("=");
-                            data[i2[0]] = i2[1];
+                            data[i2[0].trim()] = i2[1].trim();
                         });
+                        var c = new Npc(people, this, {scaleX:1.6, scaleY:1.6, data:data});
+                        c.character = parseInt(data.char) || 10;
+                        var pos = to3({x:Math.floor(obj.x/32), y:Math.floor(obj.y/32)});
+                        c.x = pos.x; c.y = pos.y;
+                        var gpos = to2(pos);
+                        c.wander = data.wander == "true" ? true : false;
+                        data.npc = c;
+                        data.sourceX = gpos.x;
+                        data.sourceY = gpos.y;
+                        this.npcs.push(data);
+                        c.makeVisible(true);
 
-
-                        console.log(data);
                     }
                 }.bind(this));
 
@@ -203,6 +218,9 @@ class Map extends View {
                 this._drawTile(this.map[x][y], x, y);
             }
         }
+        this.chars.forEach(function(c) {
+            c.drawExtras();
+        });
 
     }
 
@@ -231,12 +249,13 @@ class Map extends View {
 
         var l = sym.tiles.length;
         for (var i = 1;i<l;i++) {
-            if (i==1 && sym.character) {
-                //sym.character.forEach(function(c) {
-                //    c.draw();
-                //});
-                sym.character.draw();
-                sym.character = null;
+            if (i==1 && sym.character.length) {
+                sym.character.forEach(function(c) {
+                    c.draw();
+
+                });
+                //sym.character.draw();
+                sym.character = [];
             }
 
             var s = sym.tiles[i] - this.tiles[0].firstgid;
@@ -269,30 +288,6 @@ class Map extends View {
 
 
 
-function to3(pos, w=64, h=32) {
-    return {x : (pos.x-pos.y) * w/2, y:(pos.x + pos.y) * h/2}
-}
-
-function to2(pos, w=64, h=32) {
-    var x = pos.x;
-    var y = pos.y;
-    var xx = (2 * y + x) / 2;
-    var yy = (2 * y - x) /2;
-    xx = Math.floor(xx/w*2);
-    yy = Math.floor(yy/h);
-    return {x:xx,y:yy};
-
-}
-function to2round(pos, w=64, h=32) {
-    var x = pos.x;
-    var y = pos.y;
-    var xx = (2 * y + x) / 2;
-    var yy = (2 * y - x) /2;
-    xx = Math.round(xx/w*2);
-    yy = Math.round(yy/h);
-    return {x:xx,y:yy};
-
-}
 
 
 
