@@ -154,7 +154,10 @@ class Map extends View {
                         data.sourceY = gpos.y;
                         this.npcs.push(data);
                         c.makeVisible(true);
-
+                    }
+                    if (obj.hasOwnProperty("properties")) {
+                        data.properties = obj.properties;
+                        console.log(data.properties);
                     }
                 }.bind(this));
 

@@ -134,7 +134,15 @@
                  "ellipse":true,
                  "height":3,
                  "id":19,
-                 "name":"name=Matt;text=Hello!; char=5;wander=true",
+                 "name":"name=Matt;text=Hello!; char=15;wander=true;roamRadius=15",
+                 "properties":
+                    {
+                     "testProperty":0
+                    },
+                 "propertytypes":
+                    {
+                     "testProperty":"int"
+                    },
                  "rotation":0,
                  "type":"npc",
                  "visible":true,
