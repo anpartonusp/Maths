@@ -96,8 +96,10 @@ body {
 
 .login {
    @include full();
-   background-color: cadetblue;
+   background: cadetblue url("../images/title/Title.jpg");
+   background-size: 100%;
    color:white;
+  text-shadow: black 4px 4px 6px;
 
  }
 

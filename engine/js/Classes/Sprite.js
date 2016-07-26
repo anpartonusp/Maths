@@ -17,7 +17,8 @@ class Sprite extends Entity {
         this.animOffsets = [];
         this.animOffset = {x:0,y:0};
         this.frames = [];
-        this.blur = 0;
+        this._frame = 0;
+        this.spritesheet = null;
         dat = dat || {};
         merge(this, dat);
         if (path==null) {
@@ -31,6 +32,15 @@ class Sprite extends Entity {
     }
     set source(path) {
         if (path==null) return;
+
+        if (typeof(path)=="object" && path.hasOwnProperty("_spritesheet_")) {
+            this.spritesheet = path;
+            this.image = this.originalImage = path.image;
+            console.log("Sprite from Spritesheet");
+            return;
+        }
+
+
         if (spriteInfo.hasOwnProperty(path)) {
             this.src = spriteInfo[path];
             this.image = this.originalImage = this.src.image;
@@ -48,6 +58,10 @@ class Sprite extends Entity {
                 this.src = null;
             }
         }
+
+    }
+    set frame(f) {
+        this._frame = f;
 
     }
     get ready() {
@@ -118,7 +132,15 @@ class Sprite extends Entity {
         //if (this.blur) {
         //    s.filter = "blur("+this.blur+"px)";
         //}
-        if (this.src == null) {
+        if (this.spritesheet) {
+            if (this.scaleX && this.scaleY) {
+                s.scale(this.flipX ? -this.scaleX : this.scaleX, this.flipY ? -this.scaleY : this.scaleY);
+                var area = this.spritesheet.get(this._frame);
+                if (area) {
+                    s.drawImage(this.image, area.x, area.y, area.w, area.h, -(area.w * this.handle.x), -(area.h * this.handle.y), area.w, area.h);
+                }
+            }
+        } else if (this.src == null) {
             if (this.scaleX && this.scaleY) {
                 s.scale(this.flipX ? -this.scaleX : this.scaleX, this.flipY ? -this.scaleY : this.scaleY);
                 s.drawImage(this.image, -(this.image.width * this.handle.x), -(this.image.height * this.handle.y));

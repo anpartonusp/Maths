@@ -11,11 +11,12 @@ var map, ui;
 var TileMaps;
 var gameConfig = {};
 
-
+var people;
 
 function startGame() {
     game = new GameManager({width:WIDTH, height:HEIGHT});
-    screens = new ScreenManager([ "login", "dashboard", "profile","shop","canvas", "leftcontrols","rightcontrols"]);
+    screens = new ScreenManager([ "login", "dashboard", "profile","shop","canvas", "leftcontrols","rightcontrols", "info"]);
+    people = new SpriteSheet("images/spritesheets/people.png",32,48);
     initSprites("sprites");
     video = new Video();
     $(window).resize(function() {
@@ -23,16 +24,14 @@ function startGame() {
     });
     doResize(16/9);
     
-    screens.show(["login","rightcontrols"]);
+    screens.show(["login"]);
 
     map  = new MapContainer(TileMaps, {width:WIDTH, height:HEIGHT, x:X, y:Y, clearScreen:true, backgroundColor:"black"});
     game.add(map);
 
-    ui = new UI({x:X,y:Y,width:WIDTH, height:HEIGHT});
-    game.add(ui);
-
     game.states.addState("IDLE", idleState);
-    
+
+
 }
 
 
@@ -47,7 +46,7 @@ function logout() {
 
 function showMap() {
     game.states.setState("IDLE");
-    screens.show(["canvas","leftcontrols","rightcontrols"]);
+    screens.show(["canvas","leftcontrols","rightcontrols","info"]);
 }
 
 function centerView() {
@@ -65,6 +64,37 @@ function toggleFullScreen() {
     }
     fs = !fs;
 }
+var zoom = 1;
+function zoomIn() {
+    if (zoom<3) {
+        zoom *= 1.5;
+        map.stop().animate({scaleX: zoom, scaleY: zoom}, 0.5)
+    }
+}
 
+function zoomOut() {
+    if (zoom>1) {
+        zoom *= 1 / 1.5;
+        map.stop().animate({scaleX: zoom, scaleY: zoom}, 0.5)
+    }
+}
 
+var char = 0;
 
+function decreasecharacter() {
+    char--;
+    if (char<0) char = 24;
+    map.map.player.character = char;
+}
+
+function increasecharacter() {
+    char++;
+    if (char==25) char = 0;
+    map.map.player.character = char;
+}
+
+var mainApp = angular.module("mainApp", []);
+mainApp.controller('game', function($scope) {
+    $scope.xp = 100;
+    $scope.coins = 0;
+});

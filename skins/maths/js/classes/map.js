@@ -1,7 +1,7 @@
 class MapContainer extends View {
     constructor(tilemaps, dat) {
         super(dat);
-        this.map = new Map(tilemaps, {handle:{x:0,y:0}, x:0, y:0, backroundColor:"black"});
+        this.map = new Map(tilemaps, {handle:{x:0,y:0}, x:0, y:0, backgroundColor:"black"});
         this.add(this.map);
 
     }
@@ -33,10 +33,12 @@ class Map extends View {
         this.tileHeight = 64;
         this.chars = [];
         var pos = this.to3({x:1,y:1});
-        this.player = new Player("man",this, {handle:{x:0.5,y:0.9},x:pos.x,y:pos.y});
+        this.player = new Player(people,this, {scaleX:1.6,scaleY:1.6,handle:{x:0.5,y:1.0},x:pos.x,y:pos.y});
+        this.player.character = 4;
         this.chars.push(this.player);
         this.centerTarget = this.player;
         this.target = new TARGET("targettile",this, {flipX:true, x:100,y:100, opacity:0.0});
+        this.lessons = [];
     }
 
     load(filename) {
@@ -68,11 +70,16 @@ class Map extends View {
         this.width = this.mapWidth * this.tileWidth;
         this.height = this.mapHeight * this.tileHeight;
         this.tiles = data.tilesets;
+        this.lessons = [];
+        var objectLayers = [];
         data.tilesets.forEach(function(t) {
             t.graphics = game.imageManager.get("images/tiles/" + getFilenameFromPath(t.image));
             if (t.hasOwnProperty("tilepropertytypes")) t.tilepropertytypes = undefined;
         });
         this.map = [];
+
+
+
         for(var x = 0;x<this.mapWidth;x++) {
             var col = [];
             for(var y = 0;y<this.mapHeight;y++) {
@@ -91,17 +98,13 @@ class Map extends View {
                     character : null
                 }
                 data.layers.forEach(function(tiles) {
-                    var tt = tiles.data[y*this.mapWidth + x];
-                    t.tiles.push(tt);
+                    if (tiles.type!="objectgroup") {
+                        var tt = tiles.data[y * this.mapWidth + x];
+                        t.tiles.push(tt);
+                    }
                 }.bind(this));
                 var tile = this._getProperty(t.tiles[0]);
 
-                if (tile.startpos) {
-                    console.log("Start Position Found!")
-                    var pos = this.to3({x:x,y:y});
-                    this.player.x = pos.x;
-                    this.player.y = pos.y;
-                }
 
                 var index = (t.tiles[1]).toString();
                 if (this.tiles[0].tileproperties.hasOwnProperty(index))
@@ -110,12 +113,45 @@ class Map extends View {
             }
             this.map.push(col);
         }
+        data.layers.forEach(function(layer) {
+            if (layer.type=="objectgroup") {
+                layer.objects.forEach(function(obj) {
+                    if (obj.name=="playerstart") {
+                        var pos = {x:Math.floor(obj.x/32),y:Math.floor(obj.y/32)};
+                        pos = to3(pos);
+                        this.player.x = pos.x;
+                        this.player.y = pos.y;
+                    }
+                    if (obj.type=="lesson") {
+                        this.lessons.push({
+                            id : obj.id,
+                            x : Math.floor(obj.x/32),
+                            y : Math.floor(obj.y/32),
+                        });
+                        console.log("Lesson "+obj.id);
+                    }
+                    if (obj.type=="npc") {
+                        var data = {};
+                        var items = obj.name.split(";");
+                        items.forEach(function(i) {
+                            var i2 = i.split("=");
+                            data[i2[0]] = i2[1];
+                        });
+
+
+                        console.log(data);
+                    }
+                }.bind(this));
+
+            }
+        }.bind(this));
+
     }
 
     onMouseClick(x,y) {
         var pos = this.to2({x:x,y:y});
         var currPos = this.to2({x:this.player.x,y:this.player.y});
-        var res = astar.search(this.map, this.map[currPos.x][currPos.y], this.map[pos.x][pos.y], true);
+        var res = astar.search(this.map, this.map[currPos.x][currPos.y], this.map[pos.x][pos.y], false);
         this.player.setTargets(res);
         var tpos = this.to3(pos);
         this.target.x = tpos.x;
@@ -167,7 +203,7 @@ class Map extends View {
                 this._drawTile(this.map[x][y], x, y);
             }
         }
-//        this.player.draw();
+
     }
 
 
@@ -193,16 +229,14 @@ class Map extends View {
         var w = 64;
         var h = 64;
 
-        //this.surf.save();
-        //this.surf.translate(pos.x, pos.y);
         var l = sym.tiles.length;
         for (var i = 1;i<l;i++) {
             if (i==1 && sym.character) {
-          //      this.surf.restore();
+                //sym.character.forEach(function(c) {
+                //    c.draw();
+                //});
                 sym.character.draw();
                 sym.character = null;
-            //    this.surf.save();
-            //    this.surf.translate(pos.x, pos.y);
             }
 
             var s = sym.tiles[i] - this.tiles[0].firstgid;
@@ -213,7 +247,7 @@ class Map extends View {
 
         }
 
-        //this.surf.restore();
+
 
 
     }
@@ -223,17 +257,12 @@ class Map extends View {
         if (pos.y+64<-this.y || pos.y-64 > -this.y+HEIGHT) return;
         var w = 64;
         var h = 64;
-        //this.surf.save();
-        //this.surf.translate(pos.x, pos.y);
         var l = sym.tiles.length;
         var i = 0;
         var s = sym.tiles[i] - this.tiles[0].firstgid;
         var iy = Math.floor(s / this.tiles[0].columns);
         var ix = s % this.tiles[0].columns;
         this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x-w/2, pos.y-h/2, w, h);
-        //this.surf.restore();
-
-
     }
 
 }
@@ -266,28 +295,4 @@ function to2round(pos, w=64, h=32) {
 }
 
 
-class TARGET extends Character {
-    constructor(src, map, dat) {
-        super(src, map, dat);
-        this._active = false;
-        this.sinCounter = 0;
-    }
-    set active(b) {
-        this._active = b;
-        if (b) {
-            this.animate({opacity:0.3},0.4);
-            this.makeVisible(true);
-        } else {
-            this.animate({opacity:0.0},0.1, function(o) {
-                o.makeVisible(false);
-            });
-        }
-    }
-    update(delta) {
-        if (this._active) {
-            this.sinCounter += delta;
-            this.opacity = Math.abs(Math.sin(this.sinCounter))/2;
-        }
-    }
 
-}
