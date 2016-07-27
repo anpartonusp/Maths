@@ -171,7 +171,7 @@ module.exports = function(grunt) {
                 expand:true, flatten:true
             },
             maps: {
-                src: "skins/<%= DIR %>/maps/**.*",
+                src: "skins/<%= DIR %>/maps/**/*",
                 dest: "dist/<%= DIR %>/maps/",
                 expand:true, flatten:true
 

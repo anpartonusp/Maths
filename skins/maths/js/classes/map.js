@@ -5,8 +5,8 @@ class MapContainer extends View {
         this.add(this.map);
 
     }
-    load(filename) {
-        this.map.load(filename);
+    load(filename, callback) {
+        this.map.load(filename, callback);
     }
 
     onMouseDrag(x,y,dx,dy) {
@@ -42,18 +42,20 @@ class Map extends View {
         this.npcs = [];
     }
 
-    load(filename) {
+    load(filename, callback=function() {}) {
         var self = this;
         TileMaps = [];
         this.layers = null;
         this.ready = false;
 
         $.getScript("maps/"+filename+".js", function(d) {
-            var data = TileMaps[filename];
-            this._convert(data);
-            TileMaps = [];
-            this.ready = true;
-
+            $.getScript("maps/"+filename+"_script.js", function(d) {
+                var data = TileMaps[filename];
+                this._convert(data);
+                TileMaps = [];
+                this.ready = true;
+                callback();
+            }.bind(this));
         }.bind(this));
     }
     _getProperty(tile) {

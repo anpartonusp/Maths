@@ -29,7 +29,7 @@ function startGame() {
     map  = new MapContainer(TileMaps, {width:WIDTH, height:HEIGHT, x:X, y:Y, clearScreen:true, backgroundColor:"black"});
     game.add(map);
 
-    game.states.addState("IDLE", idleState);
+    game.states.addState("STARTGAME", startGameState);
 
 
 }
@@ -45,7 +45,7 @@ function logout() {
 }
 
 function showMap() {
-    game.states.setState("IDLE");
+    game.states.setState("STARTGAME");
     screens.show(["canvas","leftcontrols","rightcontrols","info"]);
 }
 
