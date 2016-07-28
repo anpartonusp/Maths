@@ -29,6 +29,7 @@ class Sprite extends Entity {
 
 
 
+
     }
     set source(path) {
         if (path==null) return;
@@ -36,7 +37,6 @@ class Sprite extends Entity {
         if (typeof(path)=="object" && path.hasOwnProperty("_spritesheet_")) {
             this.spritesheet = path;
             this.image = this.originalImage = path.image;
-            console.log("Sprite from Spritesheet");
             return;
         }
 
@@ -104,6 +104,7 @@ class Sprite extends Entity {
     set height(h) {
 
     }
+    preDraw() {};
 
     draw() {
         var s = this.surf;
@@ -116,6 +117,7 @@ class Sprite extends Entity {
         //this.y = Math.round(this.y);
         s.save();
         s.translate(this.x+this.animOffset.x, this.y+this.animOffset.y);
+        this.preDraw();
         if (this.rotation) s.rotate(this.rotation);
         var a = this.parent ? this.parent.opacity : 1;
         var o = this.opacity*a;
@@ -162,7 +164,8 @@ class Sprite extends Entity {
     }
     _update(delta) {
         super._update(delta);
-        this.processFrameAnimation(delta);
+        if (!this.spritesheet)
+            this.processFrameAnimation(delta);
         this.update(delta);
         this.children.forEach(function(ch) {
             ch._update(delta);

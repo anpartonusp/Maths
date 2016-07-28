@@ -9,6 +9,7 @@ div.rightcontrols#rightcontrols
 
 div.info#info
     |XP : {{ xp }}   Coins : {{ coins }}
-    button(onclick="decreasecharacter()") -
-    |Character
-    button(onclick="increasecharacter()") +
+    button(ng-click="decreasecharacter()") -
+    |Character {{char}}
+    button(ng-click="increasecharacter()") +
+    div.leveltitle#leveltitle

@@ -12,16 +12,24 @@ class MapContainer extends View {
     onMouseDrag(x,y,dx,dy) {
         this.map.x += dx;
         this.map.y += dy;
-        this.map.centerTarget = null;
+        this.map.centerTarget = this.overrideTarget = null;
     }
     setTarget() {
         this.map.centerTarget = this.map.player;
+        this.map.overrideTarget = null;
     }
 }
 
 class Map extends View {
     constructor(tilemaps, dat) {
         super(dat);
+
+        this.chars = [];
+        this.npcs = [];
+        this.lessons = [];
+
+
+
         this.handle = {x:0,y:0};
         this.ready = false;
         this.layers = null;
@@ -31,25 +39,35 @@ class Map extends View {
         this.clip = false;
         this.tileWidth = 64;
         this.tileHeight = 64;
-        this.chars = [];
         var pos = this.to3({x:1,y:1});
         this.player = new Player(people,this, {scaleX:1.6,scaleY:1.6,handle:{x:0.5,y:1.0},x:pos.x,y:pos.y});
         this.player.character = 4;
         this.chars.push(this.player);
         this.centerTarget = this.player;
-        this.target = new TARGET("targettile",this, {flipX:true, x:100,y:100, opacity:0.0});
-        this.lessons = [];
-        this.npcs = [];
-    }
+        this.overrideTarget = null;
+        this.target = new TARGET(general,this, {frame:0,flipX:true, x:100,y:100, opacity:0.0});
 
+        this.title = "";
+        this.paused = false;
+        this.filename = "";
+
+
+    }
+    pause() {
+        this.paused = true;
+    }
+    resume() {
+        this.paused = false;
+    }
     load(filename, callback=function() {}) {
         var self = this;
         TileMaps = [];
         this.layers = null;
         this.ready = false;
+        this.filename = filename;
 
         $.getScript("maps/"+filename+".js", function(d) {
-            $.getScript("maps/"+filename+"_script.js", function(d) {
+            $.getScript("maps/scripts/"+filename+"_script.js", function(d) {
                 var data = TileMaps[filename];
                 this._convert(data);
                 TileMaps = [];
@@ -131,12 +149,11 @@ class Map extends View {
                         this.player.y = pos.y;
                     }
                     if (obj.type=="lesson") {
-                        this.lessons.push({
-                            id : obj.id,
-                            x : Math.floor(obj.x/32),
-                            y : Math.floor(obj.y/32),
-                        });
-                        console.log("Lesson "+obj.id);
+                        var l = new Lesson(general,this, {active:false,frame:2, id:obj.name, gx:Math.floor(obj.x/32), gy:Math.floor(obj.y/32)});
+                        l.addCollisionTarget(this.player);
+                        this.lessons.push(l);
+                        console.log(JSON.stringify(l));
+                        console.log("Lesson "+obj.name);
                     }
                     if (obj.type=="npc") {
                         var data = {};
@@ -147,6 +164,7 @@ class Map extends View {
                         });
                         var c = new Npc(people, this, {scaleX:1.6, scaleY:1.6, data:data});
                         c.character = parseInt(data.char) || 10;
+                        c.addCollisionTarget(this.player);
                         var pos = to3({x:Math.floor(obj.x/32), y:Math.floor(obj.y/32)});
                         c.x = pos.x; c.y = pos.y;
                         var gpos = to2(pos);
@@ -157,6 +175,10 @@ class Map extends View {
                         this.npcs.push(data);
                         c.makeVisible(true);
                     }
+                    if (obj.type=="title") {
+                        this.title = obj.name;
+                        $("#leveltitle").text(this.title);
+                    }
                     if (obj.hasOwnProperty("properties")) {
                         data.properties = obj.properties;
                         console.log(data.properties);
@@ -165,10 +187,41 @@ class Map extends View {
 
             }
         }.bind(this));
-
+        //Sorts the lessons into ascending order
+        this.lessons.sort(function(a,b) {
+            return parseInt(a.id) - parseInt(b.id);
+        })
     }
 
+    NpcUnderMouse(x,y) {
+        for(var i = 0;i<this.chars.length;i++) {
+            var c = this.chars[i];
+            if (c.type=="npc") {
+                if (Math.abs(c.x-x)<32 && Math.abs(c.y-y)<32) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    deselectAllChars() {
+        this.chars.forEach(function(c) {
+            c.highlighted = false;
+        })
+    }
     onMouseClick(x,y) {
+        var other = this.NpcUnderMouse(x,y);
+        if (other) {
+            this.deselectAllChars();
+            other.selectMe();
+            var topos = to2({x:other.x,y:other.y});
+            this.player.goto(topos);
+            return;
+        }
+
+
+
         var pos = this.to2({x:x,y:y});
         var currPos = this.to2({x:this.player.x,y:this.player.y});
         var res = astar.search(this.map, this.map[currPos.x][currPos.y], this.map[pos.x][pos.y], false);
@@ -185,14 +238,36 @@ class Map extends View {
     onMouseMove(x,y) {
 
     }
+    setOverrideTarget(x,y, timeout=0) {
+        this.overrideTarget = {
+            pos : {x:x,y:y},
+            timeOut : timeout
+        };
+    }
     update(delta) {
-        if (this.centerTarget) {
-            var tx = this.centerTarget.x - (WIDTH/2);
-            var ty = this.centerTarget.y - (HEIGHT/2);
+        if (this.overrideTarget) {
+            var tx = this.overrideTarget.pos.x - (WIDTH/2);
+            var ty = this.overrideTarget.pos.y - (HEIGHT/2);
             tx = -tx;
             ty = -ty;
-            this.x += (tx - this.x) * 2 * delta;
-            this.y += (ty - this.y) * 2 * delta;
+            this.x += (tx - this.x) * 4 * delta;
+            this.y += (ty - this.y) * 4 * delta;
+            if (this.overrideTarget.timeOut>0) {
+                this.overrideTarget.timeOut-=delta;
+                if (this.overrideTarget.timeOut<=0) {
+                    this.overrideTarget = null;
+                }
+            }
+        } else {
+            if (this.centerTarget) {
+                var tx = this.centerTarget.x - (WIDTH/2);
+                var ty = this.centerTarget.y - (HEIGHT/2);
+                tx = -tx;
+                ty = -ty;
+                this.x += (tx - this.x) * 2 * delta;
+                this.y += (ty - this.y) * 2 * delta;
+            }
+
         }
         this.chars.forEach(function(c) {
             c._update(delta);
@@ -201,7 +276,14 @@ class Map extends View {
 
         this.chars.forEach(function(c) {
             c.placeInMap();
-            //c.draw();
+        });
+        this.lessons.forEach(function(c) {
+            c._update(delta);
+            //c.update(delta);
+
+            if (c.active) {
+                c.placeInMap();
+            }
         });
 
         this._draw();
@@ -287,6 +369,22 @@ class Map extends View {
         var iy = Math.floor(s / this.tiles[0].columns);
         var ix = s % this.tiles[0].columns;
         this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x-w/2, pos.y-h/2, w, h);
+    }
+
+    activateLesson(id) {
+        this.lessons.forEach(function(l) {
+            if (l.id==id) {
+                l.activate();
+            }
+        })
+    }
+
+    getLesson(id) {
+        var l = null;
+        this.lessons.forEach(function(ll) {
+            if (ll.id==id) l = ll;
+        });
+        return l;
     }
 
 }

@@ -11,12 +11,14 @@ var map, ui;
 var TileMaps;
 var gameConfig = {};
 
-var people;
+//Sprite Sheets
+var people, general;
 
 function startGame() {
     game = new GameManager({width:WIDTH, height:HEIGHT});
     screens = new ScreenManager([ "login", "dashboard", "profile","shop","canvas", "leftcontrols","rightcontrols", "info"]);
     people = new SpriteSheet("images/spritesheets/people.png",32,48);
+    general = new SpriteSheet("images/spritesheets/general.png",64,64);
     initSprites("sprites");
     video = new Video();
     $(window).resize(function() {
@@ -29,7 +31,7 @@ function startGame() {
     map  = new MapContainer(TileMaps, {width:WIDTH, height:HEIGHT, x:X, y:Y, clearScreen:true, backgroundColor:"black"});
     game.add(map);
 
-    game.states.addState("STARTGAME", startGameState);
+//    loadMap("zone1");
 
 
 }
@@ -45,7 +47,8 @@ function logout() {
 }
 
 function showMap() {
-    game.states.setState("STARTGAME");
+    loadMap("zone1");
+    //game.states.setState("STARTGAME");
     screens.show(["canvas","leftcontrols","rightcontrols","info"]);
 }
 
@@ -79,22 +82,21 @@ function zoomOut() {
     }
 }
 
-var char = 0;
-
-function decreasecharacter() {
-    char--;
-    if (char<0) char = 24;
-    map.map.player.character = char;
-}
-
-function increasecharacter() {
-    char++;
-    if (char==25) char = 0;
-    map.map.player.character = char;
-}
 
 var mainApp = angular.module("mainApp", []);
 mainApp.controller('game', function($scope) {
     $scope.xp = 100;
     $scope.coins = 0;
+    $scope.char = 0;
+    $scope.decreasecharacter = function() {
+        $scope.char--;
+        if ($scope.char<0) $scope.char = 24;
+        map.map.player.character = $scope.char;
+    }
+    $scope.increasecharacter = function() {
+        $scope.char++;
+        if ($scope.char==25) $scope.char = 0;
+        map.map.player.character = $scope.char;
+    }
+
 });

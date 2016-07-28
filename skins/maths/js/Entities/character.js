@@ -1,8 +1,12 @@
 class Character extends Sprite {
     constructor(src, map, dat) {
         super(src, dat);
-        this.targets = null;
+        this.type = "";
         this.map = map;
+        this.collisionList = [];
+        this.currCollision = null;
+
+        this.targets = null;
         this.astarCallback = function() {};
         this.currDir = randomInt(0,7);
         this._character = 1;
@@ -13,8 +17,32 @@ class Character extends Sprite {
         this.animationSpeed = 8;
         this.animSpeed = 1/this.animationSpeed;
         this.diroffsets = [0,0,20,20,30,30,10,10];
+    }
+    addCollisionTarget(target) {
+        if (this.collisionList.indexOf(target) == -1) {
+            this.collisionList.push(target);
+        }
+    }
+
+    testForCollisions() {
+        var coll = false;
+        this.collisionList.forEach(function (other) {
+            if (other != this.currCollision) {
+                if (Math.abs(this.x - other.x) <= 32 && Math.abs(this.y - other.y) <= 32) {
+                    this.currCollision = other;
+                    other.onCollide(this);
+                    this.onCollide(other);
+                    coll = true;
+                }
+            }
+        }.bind(this));
+        if (!coll) this.currCollision = null;
 
     }
+
+    onCollide(other) {};
+
+
     update(delta) {
         this.animSpeed-=delta;
         if (this.animSpeed<=0) {
@@ -32,7 +60,7 @@ class Character extends Sprite {
     placeInMap() {
         if (this.map.map) {
             var pos = to2round({x: this.x, y: this.y});
-            if (pos.x>0 && pos.x<100 && pos.y>0 && pos.y<100) {
+            if (pos.x>=0 && pos.x<100 && pos.y>=0 && pos.y<100) {
                 this.map.map[pos.x][pos.y].character.push(this);    //.push(this);
             }
         }
@@ -148,5 +176,11 @@ class Character extends Sprite {
     }
     drawExtras() {};
 
-
+    goto(pos2d) {
+        var pos = to2({x:this.x, y:this.y});
+        var cx = pos.x;
+        var cy = pos.y;
+        var res = astar.search(this.map.map, this.map.map[cx][cy], this.map.map[pos2d.x][pos2d.y], false);
+        this.setTargets(res);
+    }
 }

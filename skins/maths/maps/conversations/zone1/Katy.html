@@ -1,0 +1,26 @@
+<div class = "heading">
+<h1>Katy's Conversation</h1>
+<br />
+<h2>£5 an hour</h2>
+<br />
+</div>
+<div id="text">
+This is a conversation between you and Katy. These popups will appear when you approach a selected NPC. They will contain interesting trivia,
+clues on the whereabouts of lessons, and bonus material.
+</div>
+
+<script>
+    var l = map.map.getLesson(1);
+    if (l&&l.active) {
+        $("#text").text("The lesson has already been unlocked!")
+    }
+</script>
+
+<button onclick = "closeconv()">Ok</button>
+
+<script>
+    function closeconv() {
+        hideConversation();
+        map.map.activateLesson("1");
+    }
+</script>

@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             },
             maps: {
                 files: ["skins/<%= DIR %>/maps/**/*"],
-                tasks: ["copy:maps"]
+                tasks: ["copymaps"]
 
             },
             js: {
@@ -47,6 +47,7 @@ module.exports = function(grunt) {
                 files: "skins/<%= DIR %>/views/**/*",
                 tasks: ["pug"]
             },
+
             spritesbuilt: {
                 files: "skins/<%= DIR %>/spritesbuilt/*.*",
                 tasks: ["copy:spritesbuilt", "copy:spritesbuiltjson"]
@@ -110,6 +111,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+
         copy: {
             video: {
                 cwd: "skins/<%= DIR %>/videos/",
@@ -171,11 +173,22 @@ module.exports = function(grunt) {
                 expand:true, flatten:true
             },
             maps: {
-                src: "skins/<%= DIR %>/maps/**/*",
+                src: "skins/<%= DIR %>/maps/*",
                 dest: "dist/<%= DIR %>/maps/",
-                expand:true, flatten:true
-
+                flatten:true, expand:true,
+            },
+            maps2: {
+                cwd:"skins/<%= DIR %>/maps/conversations/",
+                src: "**/*",
+                dest: "dist/<%= DIR %>/maps/conversations/",
+                expand:true,
+            },
+            maps3: {
+                src: "skins/<%= DIR %>/maps/scripts/*",
+                dest: "dist/<%= DIR %>/maps/scripts",
+                flatten:true, expand:true,
             }
+
 
         },
         clean: {
@@ -277,11 +290,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-audiosprite');
 
-
+    grunt.registerTask("copymaps",["copy:maps","copy:maps2","copy:maps3"]);
     grunt.registerTask("compasstask",["compass:dist"]);
     grunt.registerTask("buildcodewatched",["newer:babel","concat:dist"]);
     grunt.registerTask("buildcode",["clean:babel","babel",(grunt.option("ugly")) ? "uglify:all" : "concat:dist"]);
-    grunt.registerTask("buildall",["copy:maps","copy:audio","copy:audiojson","copy:video","pug","buildcode","clean:css","copy:fonts","copy:css1", "copy:css2","compasstask","copy:json","clean:images","copy:images", "sprite:one","sprite:two","sprite:three","sprite:logo","copy:spritesbuilt","copy:spritesbuiltjson"]);
+    grunt.registerTask("buildall",["copymaps","copy:audio","copy:audiojson","copy:video","pug","buildcode","clean:css","copy:fonts","copy:css1", "copy:css2","compasstask","copy:json","clean:images","copy:images", "sprite:one","sprite:two","sprite:three","sprite:logo","copy:spritesbuilt","copy:spritesbuiltjson"]);
     grunt.registerTask("audio",["audiosprite:all"])
     grunt.registerTask("sprites",["sprite:one","sprite:two","sprite:three","sprite:logo"]);
     if (!grunt.option("skin")) {
