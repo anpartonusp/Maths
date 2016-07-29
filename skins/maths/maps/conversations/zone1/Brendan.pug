@@ -1,0 +1,21 @@
+div.heading
+    h1(style="background-color:red") Brendan
+br
+div(style="text-align:center")
+    div#text
+        h3 Interesting Fact ...
+        h2 The numbers on opposite sides of a dice add up to seven.
+        br
+        img(src="images/conversations/dice.png")
+button(onclick = "closeconv()") Ok
+
+script.
+    function closeconv() {
+        map.map.getNpc("Tom").makeVisible(true);
+        hideConversation();
+
+    }
+
+
+
+

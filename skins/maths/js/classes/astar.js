@@ -12,6 +12,7 @@ var astar = {
                 node.parent = null;
             }
         }
+        this.diagonal = true;
 
     },
     heap: function() {
@@ -21,6 +22,7 @@ var astar = {
     },
     search: function(grid, start, end, diagonal, heuristic) {
         astar.init(grid);
+        diagonal = this.diagonal;
         heuristic = heuristic || astar.manhattan;
         diagonal = !!diagonal;
 

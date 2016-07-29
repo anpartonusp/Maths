@@ -27,8 +27,8 @@ class Map extends View {
         this.chars = [];
         this.npcs = [];
         this.lessons = [];
-
-
+        this.currLesson = 0;
+        this.barriers = [];
 
         this.handle = {x:0,y:0};
         this.ready = false;
@@ -40,7 +40,7 @@ class Map extends View {
         this.tileWidth = 64;
         this.tileHeight = 64;
         var pos = this.to3({x:1,y:1});
-        this.player = new Player(people,this, {scaleX:1.6,scaleY:1.6,handle:{x:0.5,y:1.0},x:pos.x,y:pos.y});
+        this.player = new Player(people,this, {scaleX:1.6,scaleY:1.6,x:pos.x,y:pos.y});
         this.player.character = 4;
         this.chars.push(this.player);
         this.centerTarget = this.player;
@@ -88,6 +88,7 @@ class Map extends View {
     }
 
     _convert(data) {
+        this.barriers = [];
         this.mapWidth = data.width;
         this.mapHeight = data.height;
         this.tileWidth = data.tilewidth;
@@ -123,17 +124,22 @@ class Map extends View {
                     collide: false,
                     character : []
                 }
-                data.layers.forEach(function(tiles) {
+                for(var i = 0;i<data.layers.length;i++) {
+                    var tiles = data.layers[i];
                     if (tiles.type!="objectgroup") {
                         var tt = tiles.data[y * this.mapWidth + x];
                         t.tiles.push(tt);
+                        if (i>0) {
+                            var props = this.tiles[0].tileproperties[tt-1];
+                            if (props && props.hasOwnProperty("barrier")) {
+                                this.barriers.push(new Barrier(props.barrier, i, x, y, tt));
+                            }
+                        }
+
                     }
-                }.bind(this));
-                var tile = this._getProperty(t.tiles[0]);
-
-
+                }
                 var index = (t.tiles[1]).toString();
-                if (this.tiles[0].tileproperties.hasOwnProperty(index))
+                if (this.tiles[0].tileproperties.hasOwnProperty((index-1).toString()))
                     t.collide = this.tiles[0].tileproperties[index].collide;
                 col.push(t);
             }
@@ -152,8 +158,6 @@ class Map extends View {
                         var l = new Lesson(general,this, {active:false,frame:2, id:obj.name, gx:Math.floor(obj.x/32), gy:Math.floor(obj.y/32)});
                         l.addCollisionTarget(this.player);
                         this.lessons.push(l);
-                        console.log(JSON.stringify(l));
-                        console.log("Lesson "+obj.name);
                     }
                     if (obj.type=="npc") {
                         var data = {};
@@ -162,7 +166,11 @@ class Map extends View {
                             var i2 = i.split("=");
                             data[i2[0].trim()] = i2[1].trim();
                         });
-                        var c = new Npc(people, this, {scaleX:1.6, scaleY:1.6, data:data});
+                        var vis = true;
+                        if (data.hasOwnProperty("visible")) {
+                            vis = data.visible=="true" ? true : false;
+                        }
+                        var c = new Npc(people, this, {scaleX:1.6, scaleY:1.6, data:data, visible:vis});
                         c.character = parseInt(data.char) || 10;
                         c.addCollisionTarget(this.player);
                         var pos = to3({x:Math.floor(obj.x/32), y:Math.floor(obj.y/32)});
@@ -173,7 +181,7 @@ class Map extends View {
                         data.sourceX = gpos.x;
                         data.sourceY = gpos.y;
                         this.npcs.push(data);
-                        c.makeVisible(true);
+                        c.makeVisible(vis);
                     }
                     if (obj.type=="title") {
                         this.title = obj.name;
@@ -196,7 +204,7 @@ class Map extends View {
     NpcUnderMouse(x,y) {
         for(var i = 0;i<this.chars.length;i++) {
             var c = this.chars[i];
-            if (c.type=="npc") {
+            if (c.type=="npc" && c.visible) {
                 if (Math.abs(c.x-x)<32 && Math.abs(c.y-y)<32) {
                     return c;
                 }
@@ -279,7 +287,7 @@ class Map extends View {
         });
         this.lessons.forEach(function(c) {
             c._update(delta);
-            //c.update(delta);
+
 
             if (c.active) {
                 c.placeInMap();
@@ -349,7 +357,7 @@ class Map extends View {
             var iy = Math.floor(s / this.tiles[0].columns);
             var ix = s % this.tiles[0].columns;
 
-            this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x-w/2, pos.y-h/2, w, h);
+            this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x-w/2, pos.y -h/2, w, h);
 
         }
 
@@ -368,7 +376,7 @@ class Map extends View {
         var s = sym.tiles[i] - this.tiles[0].firstgid;
         var iy = Math.floor(s / this.tiles[0].columns);
         var ix = s % this.tiles[0].columns;
-        this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x-w/2, pos.y-h/2, w, h);
+        this.surf.drawImage(this.tiles[0].graphics, ix*w, iy*h, w, h, pos.x -w/2, pos.y-h/2, w, h);
     }
 
     activateLesson(id) {
@@ -385,6 +393,20 @@ class Map extends View {
             if (ll.id==id) l = ll;
         });
         return l;
+    }
+    getBarriers(name) {
+        var b = [];
+        this.barriers.forEach(function(barr) {
+            if (barr.name==name) b.push(barr);
+        });
+        return b;
+    }
+    getNpc(name) {
+        var b = null;
+        this.npcs.forEach(function(n) {
+            if (n.name==name) b = n.npc;
+        })
+        return b;
     }
 
 }

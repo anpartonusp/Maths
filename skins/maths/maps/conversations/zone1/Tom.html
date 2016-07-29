@@ -1,18 +1,9 @@
-<div class = "heading">
-<h1>Tom's Conversation</h1>
-<br />
-<h2>I would love to introduce you ....</h2>
-<br />
-</div>
-This is a conversation between you and Tom. These popups will appear when you approach a selected NPC. They will contain interesting trivia,
-clues on the whereabouts of lessons, and bonus material. And all and all.
+<div class="heading"><h1 style="background-color:red">Tom</h1></div><br/><div style="text-align:center"><div id="text"><h3>Nice to know ...</h3><h2>The number zero does not have its own Roman numeral</h2><br/><span style="color:lightyellow;font-size:3em">IX,XV,CM,VII...</span></div></div><button onclick="closeconv()">Ok</button><script>function closeconv() {
+    hideConversation();
+    var b = map.map.getBarriers("barrier3");
 
+    b.forEach(function (bb) {
+        bb.setItem(0, false);
+    })
 
-<button onclick = "hideConversation()">Ok</button>
-
-<script>
-    function closeconv() {
-        console.log("close");
-        $("#conversation").fadeOut(200);
-    }
-</script>
+}</script>

@@ -1,0 +1,33 @@
+div.heading
+    h1(style="background-color:red") Adam
+br
+div(style="text-align:center")
+    h2 How long will it take?
+    br
+
+    div#text
+        |Your lesson is now available nearby.
+
+
+button(onclick = "closeconv()") Ok
+
+
+script.
+    var l = map.map.getLesson("1");
+    if (l&&l.active) {
+        $("#text").text("You've already done this lesson")
+    }
+
+
+    function closeconv() {
+        hideConversation();
+        map.map.activateLesson("1");
+        var b = map.map.getBarriers("barrier2");
+        var cnt = 100;
+        b.forEach(function (bb) {
+            bb.setItem(0,false, cnt);
+            cnt += 200;
+        })
+    }
+
+

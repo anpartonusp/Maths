@@ -1,0 +1,27 @@
+div.heading
+    h1(style="background-color:red") Katy
+br
+div(style="text-align:center")
+    div#text Your lesson is now available to the North, near Adam.
+
+
+button(onclick = "closeconv()") Ok
+
+
+script.
+    var l = map.map.getLesson("2");
+    if (l&&l.active) {
+        $("#text").text("You've already done this lesson")
+    }
+
+    function closeconv() {
+        hideConversation();
+        var b = map.map.getBarriers("barrier4");
+        b.forEach(function (bb) {
+            bb.setItem(0,false, 1000);
+        })
+
+        map.map.activateLesson("2");
+    }
+
+

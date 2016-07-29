@@ -1,18 +1,15 @@
-<div class = "heading">
-<h1>Bethany's Conversation</h1>
-<br />
-<h2>Video Video Video</h2>
-<br />
-</div>
-<div style="text-align:center">
-    Did you know ....
-    <br />
-    <br />
-    <h2>Four is the only number that has the same number of letters as its meaning</h2>
-    <br />
+<div class="heading"><h1 style="background-color:red">Bethany</h1></div><br/><div style="text-align:center"><div id="text">A number is divisible by 9 if the sum of the digits is divisible by 9.<br/><span style="color:lightyellow;font-size:3em">9,18,27,36,45...</span></div></div><button onclick="closeconv()">Ok</button><script>function closeconv() {
 
-    <span style="color:lightyellow;font-size:3em">F,O,U,R.</span>
-</div>
+    var b = map.map.getBarriers("barrier1");
+    b.forEach(function (bb) {
+        bb.setItem(0);
+    })
+    b = map.map.getNpc("Brendan");
+    if (b) {
 
-<button onclick = "hideConversation()">Ok</button>
+        b.makeVisible(true)
+        
+    }
+    hideConversation();
 
+}</script>

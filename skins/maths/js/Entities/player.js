@@ -3,6 +3,7 @@ class Player extends Character {
         super(path, map, dat);
         this.type = "player";
         this.handle = {x: 0.5, y: 0.6};
+
     }
     onCollide(other) {
         if (other.type=="npc") {

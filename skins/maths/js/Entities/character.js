@@ -58,7 +58,7 @@ class Character extends Sprite {
      * Places the character in the map array for drawing
      */
     placeInMap() {
-        if (this.map.map) {
+        if (this.map.map && this.visible) {
             var pos = to2round({x: this.x, y: this.y});
             if (pos.x>=0 && pos.x<100 && pos.y>=0 && pos.y<100) {
                 this.map.map[pos.x][pos.y].character.push(this);    //.push(this);
@@ -106,6 +106,7 @@ class Character extends Sprite {
             this.targets = null;
             this.astarCallback();
             this.walking = false;
+            this.walkFrame = 0;
             return;
         }
         this.walking = true;
@@ -167,7 +168,9 @@ class Character extends Sprite {
     makeVisible(visible) {
         if (visible && this.map && this.map.chars.indexOf(this)==-1) {
             this.map.chars.push(this)
+            this.visible = true;
         } else if (!visible && this.map) {
+            this.visible = false;
             var i = this.map.chars.indexOf(this);
             if (i!=-1) {
                 this.map.chars.splice(i,1);

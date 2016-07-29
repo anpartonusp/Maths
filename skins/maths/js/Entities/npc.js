@@ -11,7 +11,7 @@ class Npc extends Character {
         this.nameText = new Text(this.data.name,{color:"yellow", fontSize:14, font:"Anton", shadowColor:"black"});
         this._highlighted = false;
         this.highlight = new HIGHLIGHT(general, {frame:1, visible:true});
-
+        this.handle = {x: 0.5, y: 0.6};
     }
 
     set highlighted(t) {
@@ -24,6 +24,7 @@ class Npc extends Character {
     }
 
     update(delta) {
+        if (!this.visible) return;
         this.highlight._update(delta);
         if (!this.walking && this.wander && !this.highlighted && !this.map.paused) {
             this.pauseTimer-=delta;
@@ -48,12 +49,14 @@ class Npc extends Character {
         }
     }
     preDraw() {
+        if (!this.visible) return;
         this.highlight.y = 25;
         this.highlight.draw();
     }
 
 
     drawExtras() {
+        if (!this.visible) return;
         var tx = this.x-20;
         var ty = this.y-40;
         this.nameText.x += (tx-this.nameText.x)*0.1;

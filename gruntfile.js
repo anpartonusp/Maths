@@ -179,7 +179,7 @@ module.exports = function(grunt) {
             },
             maps2: {
                 cwd:"skins/<%= DIR %>/maps/conversations/",
-                src: "**/*",
+                src: "**/*.html",
                 dest: "dist/<%= DIR %>/maps/conversations/",
                 expand:true,
             },

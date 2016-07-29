@@ -1,0 +1,28 @@
+div.heading
+    h1(style="background-color:red") Tom
+br
+div(style="text-align:center")
+    div#text
+        h3 Nice to know ...
+        h2 The number zero does not have its own Roman numeral
+        br
+        span(style="color:lightyellow;font-size:3em") IX,XV,CM,VII...
+
+
+button(onclick = "closeconv()") Ok
+
+script.
+
+    function closeconv() {
+        hideConversation();
+        var b = map.map.getBarriers("barrier3");
+
+        b.forEach(function (bb) {
+            bb.setItem(0, false);
+        })
+
+    }
+
+
+
+
